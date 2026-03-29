@@ -36,11 +36,11 @@ const client = new Client({
 // HARDCODED MESSAGES
 // ==================
 const SPAM_MESSAGE = `# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
-
+# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
 https://tenor.com/view/tno-black-league-the-great-trial-gif-14945226216622592251
-
+# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
 # PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
-
+# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
 https://discord.gg/sbkjphvQnG`;
 
 const BUTTON_LABEL = 'PROVIDENCE ON TOP';
@@ -368,7 +368,7 @@ async function executeGhost(interaction, userId) {
         
         await interaction.followUp({ content: `✅ Ghost pinged <@${userId}>.`, flags: MessageFlags.Ephemeral });
     } catch (e) {
-        await interaction.followUp({ content: `❌ Failed to ghost ping.`, flags: MessageFlags.Ephemeral });
+        await interaction.followUp({ content: `❌Your ass is GETTING BANNED Coal.`, flags: MessageFlags.Ephemeral });
     }
 }
 
@@ -379,7 +379,7 @@ async function executeEveryone(interaction) {
         
         await interaction.followUp({ content: `✅ Ghost pinged @everyone.`, flags: MessageFlags.Ephemeral });
     } catch (e) {
-        await interaction.followUp({ content: `❌ Failed. Missing permissions.`, flags: MessageFlags.Ephemeral });
+        await interaction.followUp({ content: `❌ FUCKING SAAAAAAAAAAAAAAR.`, flags: MessageFlags.Ephemeral });
     }
 }
 
@@ -468,7 +468,7 @@ client.on('interactionCreate', async interaction => {
         if (commandName === 'help') {
             const embed = new EmbedBuilder()
                 .setTitle('🔫 Agent 7')
-                .setDescription('*The ultimate raid companion*')
+                .setDescription('*The ultimate SOY RAIDER XER POWER*')
                 .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
                 .addFields(
                     { name: '━━━ SPAM ━━━', value: '', inline: false },
