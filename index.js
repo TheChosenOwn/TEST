@@ -17,6 +17,11 @@ app.listen(PORT, () => {
 });
 
 // ==================
+// CONFIG
+// ==================
+const OWNER_ID = process.env.OWNER_ID || 'YOUR_DISCORD_USER_ID';
+
+// ==================
 // DISCORD CLIENT
 // ==================
 const client = new Client({
@@ -31,11 +36,11 @@ const client = new Client({
 // HARDCODED MESSAGES
 // ==================
 const SPAM_MESSAGE = `# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
-# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
+
 https://tenor.com/view/tno-black-league-the-great-trial-gif-14945226216622592251
-# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
+
 # PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
-# PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP PROVIDENCE ON TOP
+
 https://discord.gg/sbkjphvQnG`;
 
 const BUTTON_LABEL = 'PROVIDENCE ON TOP';
@@ -156,6 +161,10 @@ const commands = [
         .setName('say')
         .setDescription('Make the bot say something')
         .addStringOption(opt => opt.setName('message').setDescription('Message to send').setRequired(true)),
+
+    new SlashCommandBuilder()
+        .setName('announce')
+        .setDescription('Send formatted announcement (Owner only)'),
 
     new SlashCommandBuilder()
         .setName('ghost')
@@ -316,6 +325,42 @@ async function executeSay(interaction, message) {
     }
 }
 
+async function executeAnnounce(interaction) {
+    const announcement = `**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+# 🔫 AGENT 7
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+**📥 ADD THE BOT:**
+https://discord.com/oauth2/authorize?client_id=${process.env.CLIENT_ID}&scope=applications.commands
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+**💥 COMMANDS:**
+
+• \`/raid\` — Spam messages
+• \`/buttonraid\` — Spam buttons
+• \`/embedspam\` — Spam embeds
+• \`/codeblock\` — ASCII blocks
+• \`/zalgo\` — Glitchy text
+• \`/ascii\` — Big ASCII art
+• \`/say\` — Custom message
+• \`/ghost\` — Ghost ping
+• \`/everyone\` — Ping everyone
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+# 🔥 PROVIDENCE ON TOP 🔥`;
+
+    try {
+        await interaction.followUp({ content: announcement });
+        await interaction.followUp({ content: `✅ Announcement sent.`, flags: MessageFlags.Ephemeral });
+    } catch (e) {
+        await interaction.followUp({ content: `❌ Failed.`, flags: MessageFlags.Ephemeral });
+    }
+}
+
 async function executeGhost(interaction, userId) {
     try {
         const msg = await interaction.followUp({ content: `<@${userId}>` });
@@ -385,6 +430,15 @@ client.on('interactionCreate', async interaction => {
             executeSay(interaction, message);
         }
 
+        if (commandName === 'announce') {
+            if (interaction.user.id !== OWNER_ID) {
+                await interaction.reply({ content: `❌ You don't have permission to use this command.`, flags: MessageFlags.Ephemeral });
+                return;
+            }
+            await interaction.reply({ content: `📢 Sending announcement...`, flags: MessageFlags.Ephemeral });
+            executeAnnounce(interaction);
+        }
+
         if (commandName === 'ghost') {
             const user = options.getUser('user');
             await interaction.reply({ content: `👻 Ghost pinging...`, flags: MessageFlags.Ephemeral });
@@ -413,8 +467,8 @@ client.on('interactionCreate', async interaction => {
 
         if (commandName === 'help') {
             const embed = new EmbedBuilder()
-                .setTitle('THE FUHHING COMMANDS')
-                .setDescription('*THE ULTIMATE SOYRAIDER*')
+                .setTitle('🔫 Agent 7')
+                .setDescription('*The ultimate raid companion*')
                 .setThumbnail(client.user.displayAvatarURL({ size: 256 }))
                 .addFields(
                     { name: '━━━ SPAM ━━━', value: '', inline: false },
